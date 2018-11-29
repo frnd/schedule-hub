@@ -4,9 +4,9 @@ RUN mkdir -p /app
 WORKDIR /app
 
 ADD . /app
-RUN go get -t -v ./...
-RUN go build ./main.go
+RUN go get -t -v ./... \
+ && go build -v
 
 EXPOSE 8080
 
-CMD ["./app"]
+CMD ["./schedule-hub"]

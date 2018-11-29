@@ -1,0 +1,47 @@
+# IntelliJ REST HTTP client
+
+GET http://localhost:8080/v1/articles
+Accept: application/json
+
+###
+
+POST http://localhost:8080/v1/user/signup
+Content-Type: application/json
+
+{
+  "name": "testing",
+  "email": "test@test.com",
+  "password": "123456"
+}
+
+###
+
+POST http://localhost:8080/v1/user/signin
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "123456"
+}
+
+> {% client.global.set("Cookie", response.headers.valueOf("Set-Cookie")); %}
+
+###
+
+GET http://localhost:8080/v1/articles
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+GET http://localhost:8080/v1/user/signout
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+GET http://localhost:8080/v1/articles
+Accept: application/json
+Cookie: {{Cookie}}
+
+###

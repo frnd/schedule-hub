@@ -27,7 +27,7 @@ func SetupRouter() *gin.Engine {
 	gin.SetMode(gin.TestMode)
 
 	store, _ := sessions.NewRedisStore(10, "tcp", "localhost:6379", "", []byte("secret"))
-	r.Use(sessions.Sessions("gin-boilerplate-session", store))
+	r.Use(sessions.Sessions("schedule-hub-session", store))
 
 	v1 := r.Group("/v1")
 	{
