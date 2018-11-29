@@ -23,9 +23,9 @@ services:
     ports:
     - "6379:6379"
 
-  adminer:
-    container_name: schedulename-adminer
-    image: adminer
-    restart: always
-    ports:
-    - 8081:8081
+#  adminer:
+#    container_name: schedulename-adminer
+#    image: adminer
+#    restart: always
+#    ports:
+#    - 8081:8080
