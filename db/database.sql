@@ -251,7 +251,8 @@ ALTER TABLE ONLY article
 --
 
 ALTER TABLE ONLY project
-    ADD CONSTRAINT project_id PRIMARY KEY (id);
+    ADD CONSTRAINT project_id PRIMARY KEY (id),
+    ADD CONSTRAINT project_key UNIQUE (key);
 
 
 --

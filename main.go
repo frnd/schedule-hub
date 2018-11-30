@@ -59,6 +59,15 @@ func main() {
 		v1.GET("/article/:id", article.One)
 		v1.PUT("/article/:id", article.Update)
 		v1.DELETE("/article/:id", article.Delete)
+
+		/*** START Project ***/
+		project := new(controllers.ProjectController)
+
+		v1.POST("/project", project.Create)
+		v1.GET("/projects", project.All)
+		v1.GET("/project/:id", project.One)
+		v1.PUT("/project/:id", project.Update)
+		v1.DELETE("/project/:id", project.Delete)
 	}
 
 	r.LoadHTMLGlob("./public/html/*")
