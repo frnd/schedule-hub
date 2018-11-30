@@ -68,6 +68,15 @@ func main() {
 		v1.GET("/project/:id", project.One)
 		v1.PUT("/project/:id", project.Update)
 		v1.DELETE("/project/:id", project.Delete)
+
+		/*** START Employee ***/
+		employee := new(controllers.EmployeeController)
+
+		v1.POST("/employee", employee.Create)
+		v1.GET("/employees", employee.All)
+		v1.GET("/employee/:id", employee.One)
+		v1.PUT("/employee/:id", employee.Update)
+		v1.DELETE("/employee/:id", employee.Delete)
 	}
 
 	r.LoadHTMLGlob("./public/html/*")

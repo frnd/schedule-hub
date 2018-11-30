@@ -1,0 +1,68 @@
+# CRUD for employee
+
+GET http://localhost:8080/v1/employees
+Accept: application/json
+
+###
+
+POST http://localhost:8080/v1/user/signin
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "123456"
+}
+
+> {% client.global.set("Cookie", response.headers.valueOf("Set-Cookie")); %}
+
+###
+
+GET http://localhost:8080/v1/employees
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+POST http://localhost:8080/v1/employee
+Content-Type: application/json
+Cookie: {{Cookie}}
+
+{
+  "name": "Employee Name"
+}
+
+###
+
+GET http://localhost:8080/v1/employee/1
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+PUT http://localhost:8080/v1/employee/1
+Content-Type: application/json
+Cookie: {{Cookie}}
+
+{
+  "name": "Updated Employee Name"
+}
+
+###
+
+DELETE http://localhost:8080/v1/employee/1
+Content-Type: application/json
+Cookie: {{Cookie}}
+
+###
+
+GET http://localhost:8080/v1/user/signout
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+GET http://localhost:8080/v1/employees
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
