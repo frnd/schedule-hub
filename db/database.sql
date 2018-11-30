@@ -115,6 +115,43 @@ ALTER SEQUENCE article_id_seq OWNED BY article.id;
 
 
 --
+-- Name: project; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+--
+
+CREATE TABLE project (
+    id integer NOT NULL,
+    key character varying,
+    name character varying,
+    description text,
+    updated_at integer,
+    created_at integer
+);
+
+
+ALTER TABLE project OWNER TO postgres;
+
+--
+-- Name: project_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE project_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE project_id_seq OWNER TO postgres;
+
+--
+-- Name: project_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE project_id_seq OWNED BY project.id;
+
+
+--
 -- Name: user; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
 --
 
@@ -156,6 +193,12 @@ ALTER SEQUENCE user_id_seq OWNED BY "user".id;
 --
 
 ALTER TABLE ONLY article ALTER COLUMN id SET DEFAULT nextval('article_id_seq'::regclass);
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY project ALTER COLUMN id SET DEFAULT nextval('project_id_seq'::regclass);
 
 
 --
@@ -204,6 +247,15 @@ ALTER TABLE ONLY article
 
 
 --
+-- Name: project_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+--
+
+ALTER TABLE ONLY project
+    ADD CONSTRAINT project_id PRIMARY KEY (id),
+    ADD CONSTRAINT project_key UNIQUE (key);
+
+
+--
 -- Name: user_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
@@ -224,8 +276,14 @@ ALTER TABLE ONLY article
 -- Name: article create_article_created_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
-CREATE TRIGGER create_article_created_at BEFORE INSERT ON article FOR EACH ROW EXECUTE PROCEDURE created_at_column();
+CREATE TRIGGER create_article_created_at BEFORE INSERT ON article FOR EACH ROW EXECUTE PROCEDURE created_at_column();--
 
+
+-- TOC entry 2284 (class 2620 OID 36647)
+-- Name: project create_project_created_at; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER create_project_created_at BEFORE INSERT ON project FOR EACH ROW EXECUTE PROCEDURE created_at_column();
 
 --
 -- TOC entry 2286 (class 2620 OID 36653)
@@ -241,6 +299,13 @@ CREATE TRIGGER create_user_created_at BEFORE INSERT ON "user" FOR EACH ROW EXECU
 --
 
 CREATE TRIGGER update_article_updated_at BEFORE UPDATE ON article FOR EACH ROW EXECUTE PROCEDURE update_at_column();
+
+--
+-- TOC entry 2285 (class 2620 OID 36648)
+-- Name: project update_project_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER update_project_updated_at BEFORE UPDATE ON project FOR EACH ROW EXECUTE PROCEDURE update_at_column();
 
 
 --
