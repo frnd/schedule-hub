@@ -35,6 +35,18 @@ Cookie: {{Cookie}}
 
 ###
 
+POST http://localhost:8080/v1/project
+Content-Type: application/json
+Cookie: {{Cookie}}
+
+{
+  "key": "BBB",
+  "name": "Project Name BBB",
+  "description": "Un super proyecto BBB"
+}
+
+###
+
 GET http://localhost:8080/v1/projects
 Accept: application/json
 Cookie: {{Cookie}}
@@ -52,9 +64,9 @@ Content-Type: application/json
 Cookie: {{Cookie}}
 
 {
-  "key": "BBB",
-  "name": "Project Name",
-  "description": "Un super proyecto"
+  "key": "AAA",
+  "name": "Project Name Updated",
+  "description": "Project Updated"
 }
 
 ###

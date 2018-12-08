@@ -85,8 +85,6 @@ func (ctrl EmployeeController) One(c *gin.Context) {
 			return
 		}
 		c.JSON(200, gin.H{"data": data})
-	} else {
-		c.JSON(404, gin.H{"Message": "Invalid parameter"})
 	}
 }
 

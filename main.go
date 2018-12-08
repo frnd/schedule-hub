@@ -77,6 +77,17 @@ func main() {
 		v1.GET("/employee/:id", employee.One)
 		v1.PUT("/employee/:id", employee.Update)
 		v1.DELETE("/employee/:id", employee.Delete)
+
+		/*** START Assignment ***/
+		assignment := new(controllers.AssignmentController)
+
+		v1.POST("/assignment", assignment.Create)
+		v1.GET("/assignment/employee/:employeeId", assignment.All)
+		v1.GET("/assignment/project/:projectId", assignment.All)
+		v1.GET("/assignment/employee/:employeeId/project/:projectId", assignment.All)
+		v1.GET("/assignment/employee/:employeeId/project/:projectId/date/:date", assignment.One)
+		v1.PUT("/assignment/employee/:employeeId/project/:projectId/date/:date", assignment.Update)
+		v1.DELETE("/assignment/employee/:employeeId/project/:projectId/date/:date", assignment.Delete)
 	}
 
 	r.LoadHTMLGlob("./public/html/*")

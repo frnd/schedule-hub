@@ -183,6 +183,19 @@ ALTER TABLE project_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE project_id_seq OWNED BY project.id;
 
+--
+-- Name: project; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
+--
+
+CREATE TABLE assignment (
+    project_id integer NOT NULL,
+    employee_id integer NOT NULL,
+    date integer,
+    pct integer NOT NULL,
+    updated_at integer,
+    created_at integer
+);
+
 
 --
 -- Name: user; Type: TABLE; Schema: public; Owner: postgres; Tablespace:
@@ -301,6 +314,13 @@ ALTER TABLE ONLY employee
     ADD CONSTRAINT employee_id PRIMARY KEY (id);
 
 --
+-- Name: assignment_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
+--
+
+ALTER TABLE ONLY assignment
+    ADD CONSTRAINT assignment_pk PRIMARY KEY (project_id, employee_id, "date");
+
+--
 -- Name: user_id; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace:
 --
 
@@ -314,6 +334,20 @@ ALTER TABLE ONLY "user"
 
 ALTER TABLE ONLY article
     ADD CONSTRAINT article_user_id FOREIGN KEY (user_id) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+--
+-- Name: assignment_project_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY assignment
+    ADD CONSTRAINT assignment_project_id FOREIGN KEY (project_id) REFERENCES project(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+--
+-- Name: assignment_employee_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY assignment
+    ADD CONSTRAINT assignment_employee_id FOREIGN KEY (employee_id) REFERENCES employee(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -343,6 +377,13 @@ CREATE TRIGGER create_employee_created_at BEFORE INSERT ON employee FOR EACH ROW
 
 CREATE TRIGGER create_user_created_at BEFORE INSERT ON "user" FOR EACH ROW EXECUTE PROCEDURE created_at_column();
 
+--
+-- TOC entry 2286 (class 2620 OID 36653)
+-- Name: user create_user_created_at; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER create_assignment_created_at BEFORE INSERT ON assignment FOR EACH ROW EXECUTE PROCEDURE created_at_column();
+
 
 --
 -- TOC entry 2285 (class 2620 OID 36648)
@@ -367,13 +408,18 @@ CREATE TRIGGER update_employee_updated_at BEFORE UPDATE ON employee FOR EACH ROW
 
 
 --
+-- TOC entry 2285 (class 2620 OID 36648)
+-- Name: project update_employee_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER update_assignment_updated_at BEFORE UPDATE ON assignment FOR EACH ROW EXECUTE PROCEDURE update_at_column();
+
+--
 -- TOC entry 2287 (class 2620 OID 36654)
 -- Name: user update_user_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER update_user_updated_at BEFORE UPDATE ON "user" FOR EACH ROW EXECUTE PROCEDURE update_at_column();
-
-
 
 --
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
