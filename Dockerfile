@@ -1,12 +1,11 @@
-FROM golang:latest
+FROM golang:1.8
 
-RUN mkdir -p /app
-WORKDIR /app
+WORKDIR /go/src/github.com/frnd/schedule-hub/
+COPY . .
 
-ADD . /app
-RUN go get -t -v ./... \
- && go build -v
+RUN go get -d -v ./...
+RUN go install -v ./...
+
+CMD ["schedule-hub"]
 
 EXPOSE 8080
-
-CMD ["./schedule-hub"]

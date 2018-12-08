@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/frnd/schedule-hub/util"
 	"net/http"
 	"runtime"
 
@@ -10,6 +11,12 @@ import (
 
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
+)
+
+var (
+	RedisHost = util.GetEnv("REDIS_HOST", "localhost")
+	RedisPort = util.GetEnv("REDIS_PORT", "6379")
+	RedisPassword = util.GetEnv("REDIS_PASSWORD", "")
 )
 
 //CORSMiddleware ...
@@ -34,8 +41,7 @@ func CORSMiddleware() gin.HandlerFunc {
 func main() {
 	r := gin.Default()
 
-	// TODO move redis host and port to an env variable.
-	store, _ := sessions.NewRedisStore(10, "tcp", "localhost:6379", "", []byte("secret"))
+	store, _ := sessions.NewRedisStore(10, "tcp", RedisHost + ":" + RedisPort, RedisPassword, []byte("secret"))
 	r.Use(sessions.Sessions("schedule-hub-session", store))
 
 	r.Use(CORSMiddleware())

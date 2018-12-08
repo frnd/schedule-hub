@@ -3,10 +3,10 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"log"
-
+	"github.com/frnd/schedule-hub/util"
 	"github.com/go-gorp/gorp"
 	_ "github.com/lib/pq" //import postgres
+	"log"
 )
 
 //DB ...
@@ -14,15 +14,12 @@ type DB struct {
 	*sql.DB
 }
 
-const (
-	// TODO move to env variables.
-	//DbUser ...
-	DbUser = "user"
-	// TODO move to env variables.
-	//DbPassword ...
-	DbPassword = "p4ssword"
-	//DbName ...
-	DbName = "schedulehub"
+var (
+	DbHost = util.GetEnv("DATABASE_HOST", "localhost")
+	DbPort = util.GetEnv("DATABASE_PORT", "5432")
+	DbUser = util.GetEnv("DATABASE_USER", "user")
+	DbPassword = util.GetEnv("DATABASE_PASSWORD", "p4ssword")
+	DbName = util.GetEnv("DATABASE_NAME", "schedulehub")
 )
 
 var db *gorp.DbMap
@@ -30,8 +27,8 @@ var db *gorp.DbMap
 //Init ...
 func Init() {
 
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",
-		DbUser, DbPassword, DbName)
+	dbinfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		DbHost,DbPort, DbUser, DbPassword, DbName)
 
 	var err error
 	db, err = ConnectDB(dbinfo)
