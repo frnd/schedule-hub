@@ -28,8 +28,8 @@ Content-Type: application/json
 Cookie: {{Cookie}}
 
 {
-  "employeeId": 1,
-  "projectId": 1,
+  "employeeId": 2,
+  "projectId": 2,
   "pct": 100,
   "date": 1543673155
 }
@@ -41,8 +41,8 @@ Content-Type: application/json
 Cookie: {{Cookie}}
 
 {
-  "employeeId": 1,
-  "projectId": 1,
+  "employeeId": 2,
+  "projectId": 2,
   "pct": 50,
   "startDate": 1543848080,
   "endDate": 1544020880
@@ -54,13 +54,13 @@ Cookie: {{Cookie}}
 
 ###
 
-GET http://localhost:8080/v1/assignment/employee/1/project/1/date/1543881600
+GET http://localhost:8080/v1/assignment/employee/2/project/2/date/1543881600
 Accept: application/json
 Cookie: {{Cookie}}
 
 ###
 
-PUT http://localhost:8080/v1/assignment/employee/1/project/1/date/1543881600
+PUT http://localhost:8080/v1/assignment/employee/2/project/2/date/1543881600
 Accept: application/json
 Cookie: {{Cookie}}
 
@@ -70,19 +70,19 @@ Cookie: {{Cookie}}
 
 ###
 
-GET http://localhost:8080/v1/assignment/employee/1
+GET http://localhost:8080/v1/assignment/employee/2?from=1543673000&to=1544020900
 Accept: application/json
 Cookie: {{Cookie}}
 
 ###
 
-GET http://localhost:8080/v1/assignment/project/1
+GET http://localhost:8080/v1/assignment/project/2?from=1543673000&to=1544020900
 Accept: application/json
 Cookie: {{Cookie}}
 
 ###
 
-DELETE http://localhost:8080/v1/assignment/employee/1/project/1/date/1543881600
+DELETE http://localhost:8080/v1/assignment/employee/2/project/2/date/1543881600
 Content-Type: application/json
 Cookie: {{Cookie}}
 

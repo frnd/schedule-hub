@@ -27,13 +27,12 @@ func (m ProjectModel) Create(form forms.ProjectForm) (projectID int64, err error
 
 	i := "INSERT INTO public.project(key, name, description, updated_at, created_at) " +
 		"VALUES($1, $2, $3, $4, $5) RETURNING id"
-	r, err := getDb.Exec(i, form.Key, form.Name, form.Description, time.Now().Unix(), time.Now().Unix())
+	// r, err := getDb.Exec(i, form.Key, form.Name, form.Description, time.Now().Unix(), time.Now().Unix())
+	getDb.QueryRow(i, form.Key, form.Name, form.Description, time.Now().Unix(), time.Now().Unix()).Scan(&projectID)
 
 	if err != nil {
 		return 0, err
 	}
-
-	projectID, err = r.LastInsertId()
 
 	return projectID, err
 }

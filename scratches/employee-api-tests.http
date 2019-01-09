@@ -33,6 +33,16 @@ Cookie: {{Cookie}}
 
 ###
 
+POST http://localhost:8080/v1/employee
+Content-Type: application/json
+Cookie: {{Cookie}}
+
+{
+  "name": "Employee 2 Name"
+}
+
+###
+
 GET http://localhost:8080/v1/employee/1
 Accept: application/json
 Cookie: {{Cookie}}
