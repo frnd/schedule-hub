@@ -20,20 +20,19 @@ type Employee struct {
 type EmployeeModel struct{}
 
 //Create ...
-func (m EmployeeModel) Create(form forms.EmployeeForm) (projectID int64, err error) {
+func (m EmployeeModel) Create(form forms.EmployeeForm) (employeeID int64, err error) {
 	getDb := db.GetDB()
 
 	i := "INSERT INTO public.employee(name, updated_at, created_at) " +
 		"VALUES($1, $2, $3) RETURNING id"
-	r, err := getDb.Exec(i, form.Name, time.Now().Unix(), time.Now().Unix())
+	// r, err := getDb.Exec(i, form.Name, time.Now().Unix(), time.Now().Unix())
+	getDb.QueryRow(i, form.Name, time.Now().Unix(), time.Now().Unix()).Scan(&employeeID)
 
 	if err != nil {
 		return 0, err
 	}
 
-	projectID, err = r.LastInsertId()
-
-	return projectID, err
+	return employeeID, err
 }
 
 //One ...
