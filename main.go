@@ -14,8 +14,8 @@ import (
 )
 
 var (
-	RedisHost = util.GetEnv("REDIS_HOST", "localhost")
-	RedisPort = util.GetEnv("REDIS_PORT", "6379")
+	RedisHost     = util.GetEnv("REDIS_HOST", "localhost")
+	RedisPort     = util.GetEnv("REDIS_PORT", "6379")
 	RedisPassword = util.GetEnv("REDIS_PASSWORD", "")
 )
 
@@ -41,7 +41,7 @@ func CORSMiddleware() gin.HandlerFunc {
 func main() {
 	r := gin.Default()
 
-	store, _ := sessions.NewRedisStore(10, "tcp", RedisHost + ":" + RedisPort, RedisPassword, []byte("secret"))
+	store, _ := sessions.NewRedisStore(10, "tcp", RedisHost+":"+RedisPort, RedisPassword, []byte("secret"))
 	r.Use(sessions.Sessions("schedule-hub-session", store))
 
 	r.Use(CORSMiddleware())
@@ -56,15 +56,6 @@ func main() {
 		v1.POST("/user/signin", user.Signin)
 		v1.POST("/user/signup", user.Signup)
 		v1.GET("/user/signout", user.Signout)
-
-		/*** START Article ***/
-		article := new(controllers.ArticleController)
-
-		v1.POST("/article", article.Create)
-		v1.GET("/articles", article.All)
-		v1.GET("/article/:id", article.One)
-		v1.PUT("/article/:id", article.Update)
-		v1.DELETE("/article/:id", article.Delete)
 
 		/*** START Project ***/
 		project := new(controllers.ProjectController)
@@ -102,7 +93,7 @@ func main() {
 
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{
-			"goVersion":             runtime.Version(),
+			"goVersion": runtime.Version(),
 		})
 	})
 

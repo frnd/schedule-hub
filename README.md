@@ -35,7 +35,7 @@ $ psql -U postgres -h localhost < ./db/database.sql
 Use docker-compose to start required services:
 
 ```
-$ docker-compose up
+$ docker-compose up -d
 ```
 
 Start the application with:
