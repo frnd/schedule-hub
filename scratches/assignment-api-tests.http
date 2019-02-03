@@ -1,0 +1,95 @@
+# CRUD for project
+
+GET http://localhost:8080/v1/assignment/employee/2/project/2/date/1543622400
+Accept: application/json
+
+###
+
+POST http://localhost:8080/v1/user/signin
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "123456"
+}
+
+> {% client.global.set("Cookie", response.headers.valueOf("Set-Cookie")); %}
+
+###
+
+GET http://localhost:8080/v1/assignment/employee/2/project/2/date/1543622400
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+POST http://localhost:8080/v1/assignment
+Content-Type: application/json
+Cookie: {{Cookie}}
+
+{
+  "employeeId": 2,
+  "projectId": 2,
+  "pct": 100,
+  "date": 1543673155
+}
+
+###
+
+POST http://localhost:8080/v1/assignment
+Content-Type: application/json
+Cookie: {{Cookie}}
+
+{
+  "employeeId": 2,
+  "projectId": 2,
+  "pct": 50,
+  "startDate": 1543848080,
+  "endDate": 1544020880
+}
+// 1543848080: Monday, 3 December 2018 14:41:20
+// 1544020880: Wednesday, 5 December 2018 14:41:20
+
+
+
+###
+
+GET http://localhost:8080/v1/assignment/employee/2/project/2/date/1543881600
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+PUT http://localhost:8080/v1/assignment/employee/2/project/2/date/1543881600
+Accept: application/json
+Cookie: {{Cookie}}
+
+{
+  "pct": 10
+}
+
+###
+
+GET http://localhost:8080/v1/assignment/employee/2?from=1543673000&to=1544020900
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+GET http://localhost:8080/v1/assignment/project/2?from=1543673000&to=1544020900
+Accept: application/json
+Cookie: {{Cookie}}
+
+###
+
+DELETE http://localhost:8080/v1/assignment/employee/2/project/2/date/1543881600
+Content-Type: application/json
+Cookie: {{Cookie}}
+
+###
+
+GET http://localhost:8080/v1/user/signout
+Accept: application/json
+Cookie: {{Cookie}}
+
+###

@@ -1,0 +1,12 @@
+# IntelliJ REST HTTP client
+
+POST http://localhost:8080/v1/user/signup
+Content-Type: application/json
+
+{
+  "name": "testing",
+  "email": "test@test.com",
+  "password": "123456"
+}
+
+###

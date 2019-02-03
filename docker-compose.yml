@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+
+  db:
+    container_name: schedulehub-db
+    image: postgres
+    restart: always
+    volumes:
+    - ./db/database.sql:/docker-entrypoint-initdb.d/database.sql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=p4ssword
+      - POSTGRES_DB=schedulehub
+      - POSTGRES_PORT=5432
+
+  redis:
+    container_name: schedulename-redis
+    image: redis:4.0.5-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+    - "6379:6379"
+
+#  adminer:
+#    container_name: schedulename-adminer
+#    image: adminer
+#    restart: always
+#    ports:
+#    - 8081:8080
